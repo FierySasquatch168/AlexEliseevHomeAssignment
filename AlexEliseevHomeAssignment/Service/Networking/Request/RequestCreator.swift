@@ -8,14 +8,9 @@
 import Foundation
 
 struct RequestCreator {
-    static func createGetRequest(endPoint: EndPointValue, query: QueryItems, item: Int) -> NetworkRequest {
-        let url = URL(string: "\(endPoint.stringValue)\(query.stingValue)\(item)")
+    static func createGetRequest(endPoint: EndPointValue, query: QueryItems, item: String) -> NetworkRequest {
+        let url = URL(string: endPoint.stringValue + query.stringValue + item)
         return NetworkRequest(endPoint: url,
                               httpMethod: .get)
-    }
-    
-    static func createSearchRequest(endPoint: EndPointValue, query: QueryItems, name: String) -> NetworkRequest {
-        let url = URL(string: endPoint.stringValue + query.stingValue + name)
-        return NetworkRequest(endPoint: url, httpMethod: .get)
     }
 }

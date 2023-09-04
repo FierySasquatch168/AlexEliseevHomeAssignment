@@ -97,7 +97,6 @@ final class MainViewModel: MainViewModelProtocol {
             .sink { [weak self] favourites in
                 guard let self else { return }
                 self.updateVisibleRows(self.storedCharacters)
-                print("updated")
         }
             .store(in: &cancellables)
     }
@@ -132,7 +131,7 @@ private extension MainViewModel {
     func sendPageRequest() {
         if requestResultPublisher.value != nil { return }
         requestResultPublisher.send(.loading)
-        let request = RequestCreator.createGetRequest(endPoint: EndPointValue.main, query: QueryItems.main, item: currentPage)
+        let request = RequestCreator.createGetRequest(endPoint: EndPointValue.main, query: QueryItems.main, item: currentPage.toString())
         
         networkService.networkPublisher(request: request, type: ResponseModel.self)
             .sink(receiveCompletion: { [weak self] completion in
@@ -150,7 +149,7 @@ private extension MainViewModel {
     func sendNameRequest(_ name: String) {
         if requestResultPublisher.value != nil { return }
         requestResultPublisher.send(.loading)
-        let request = RequestCreator.createSearchRequest(endPoint: EndPointValue.main, query: QueryItems.characterName, name: name)
+        let request = RequestCreator.createGetRequest(endPoint: EndPointValue.main, query: QueryItems.characterName, item: name)
         networkService.networkPublisher(request: request, type: ResponseModel.self)
             .sink { [weak self] completion in
                 if case .failure(let error) = completion {

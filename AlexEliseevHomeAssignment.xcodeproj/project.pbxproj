@@ -37,6 +37,7 @@
 		37F01DDA2AA47D8100A012B1 /* Ext StringToCgfloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F01DD92AA47D8100A012B1 /* Ext StringToCgfloat.swift */; };
 		37F01DDC2AA4842000A012B1 /* QueryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F01DDB2AA4842000A012B1 /* QueryItems.swift */; };
 		37F01DDE2AA4A43700A012B1 /* VisibleCharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F01DDD2AA4A43700A012B1 /* VisibleCharacterModel.swift */; };
+		37F59F4C2AA5D5B800F0B435 /* Ext ToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F59F4B2AA5D5B800F0B435 /* Ext ToString.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		37F01DD92AA47D8100A012B1 /* Ext StringToCgfloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext StringToCgfloat.swift"; sourceTree = "<group>"; };
 		37F01DDB2AA4842000A012B1 /* QueryItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryItems.swift; sourceTree = "<group>"; };
 		37F01DDD2AA4A43700A012B1 /* VisibleCharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibleCharacterModel.swift; sourceTree = "<group>"; };
+		37F59F4B2AA5D5B800F0B435 /* Ext ToString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext ToString.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +245,7 @@
 				37F01DC12AA464AF00A012B1 /* Ext ReuseIdentifiable.swift */,
 				37F01DD72AA475B300A012B1 /* Ext LoadingAnimationUpdate.swift */,
 				37F01DD92AA47D8100A012B1 /* Ext StringToCgfloat.swift */,
+				37F59F4B2AA5D5B800F0B435 /* Ext ToString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				37F01DB62AA463C200A012B1 /* RequestCreator.swift in Sources */,
 				37F01DB22AA463A000A012B1 /* EndpointValue.swift in Sources */,
 				37F01D892AA4624A00A012B1 /* AppDelegate.swift in Sources */,
+				37F59F4C2AA5D5B800F0B435 /* Ext ToString.swift in Sources */,
 				37F01DDE2AA4A43700A012B1 /* VisibleCharacterModel.swift in Sources */,
 				37F01DCD2AA467CA00A012B1 /* MainCellViewModel.swift in Sources */,
 				37F01DC02AA4649100A012B1 /* Ext Presentable.swift in Sources */,

@@ -48,7 +48,6 @@ private extension TableViewDataSource {
         cell.selectionStyle = .none
         cell.isSelected = item.favourite
         
-        print("cellName: \(item.name) isFavourite: \(item.favourite) and isSelected: \(cell.isSelected)")
         return cell
     }
     

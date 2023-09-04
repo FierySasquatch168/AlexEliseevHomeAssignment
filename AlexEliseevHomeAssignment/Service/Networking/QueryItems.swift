@@ -11,7 +11,7 @@ enum QueryItems {
     case main
     case characterName
     
-    var stingValue: String {
+    var stringValue: String {
         switch self {
         case .main:
             return K.URLPaths.baseQuery
