@@ -14,7 +14,8 @@ struct ResponseModel: Decodable {
     let results: [StarWarsCharacter]
 }
 
-struct StarWarsCharacter: Decodable {
+struct StarWarsCharacter: Decodable, Hashable {
+    let id = UUID().uuidString
     let name: String
     let height: String
 }

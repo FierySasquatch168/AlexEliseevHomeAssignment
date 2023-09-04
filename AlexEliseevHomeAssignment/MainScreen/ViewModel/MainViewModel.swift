@@ -27,22 +27,17 @@ final class MainViewModel: MainViewModelProtocol {
     
     var favouriteItemPublisher = CurrentValueSubject<IndexPath?, Never>(nil)
     
-    
     private var cancellables = Set<AnyCancellable>()
     
     private var totalCharacters: Int = 0
     private var currentPage: Int = 1
     
-    private var favouriteCharacter: String? {
-        didSet {
-            updateVisibleRows(storedRows)
-        }
+    private var favouriteCharacter: [String] {
+        return dataStore.currentStoredFavouriteName
     }
-        
-    private var storedRows: [StarWarsCharacter] = [] {
-        didSet {
-            updateVisibleRows(storedRows)
-        }
+    
+    private var storedCharacters: [StarWarsCharacter] {
+        return dataStore.currentStoredCharacters
     }
     
     private var visibleRows: [VisibleCharacterModel] = [] {
@@ -52,17 +47,19 @@ final class MainViewModel: MainViewModelProtocol {
     }
     
     private let networkService: NetworkService
+    private let dataStore: DataStoreManagerProtocol
     
     // MARK: - init
-    init(networkService: NetworkService) {
+    init(networkService: NetworkService, dataStore: DataStoreManagerProtocol) {
         self.networkService = networkService
-        
+        self.dataStore = dataStore
         sendPageRequest()
-        bind()
+        bindView()
+        bindStore()
     }
     
     // MARK: - Bind
-    private func bind() {
+    private func bindView() {
         lastRowPublisher
             .sink { [weak self] lastRow in
                 self?.requestNextPageIfTheLastRow(lastRow)
@@ -78,13 +75,29 @@ final class MainViewModel: MainViewModelProtocol {
         clearTextFieldPublisher
             .sink { [weak self] isCleared in
                 guard let self else { return }
-                self.updateVisibleRows(storedRows)
+                self.updateVisibleRows(self.storedCharacters)
         }
             .store(in: &cancellables)
         
         favouriteItemPublisher
             .sink { [weak self] selectedIndexPath in
                 self?.selectCharacter(selectedIndexPath?.row)
+        }
+            .store(in: &cancellables)
+    }
+    
+    private func bindStore() {
+        dataStore.storedDataPublisher
+            .sink { [weak self] storedModel in
+                self?.updateVisibleRows(storedModel)
+        }
+            .store(in: &cancellables)
+        
+        dataStore.storedFavouritePublisher
+            .sink { [weak self] favourites in
+                guard let self else { return }
+                self.updateVisibleRows(self.storedCharacters)
+                print("updated")
         }
             .store(in: &cancellables)
     }
@@ -99,7 +112,7 @@ final class MainViewModel: MainViewModelProtocol {
     
     private func selectCharacter(_ row: Int?) {
         guard let row else { return }
-        favouriteCharacter = storedRows[row].name
+        dataStore.saveFavouritePublisher.send([storedCharacters[row].name])
     }
 }
 
@@ -129,7 +142,7 @@ private extension MainViewModel {
                 self?.requestResultPublisher.send(nil)
             }, receiveValue: { [weak self] responseModel in
                 self?.totalCharacters = responseModel.count
-                self?.storedRows.append(contentsOf: responseModel.results)
+                self?.dataStore.saveItemPublisher.send(responseModel.results)
             })
             .store(in: &cancellables)
     }
@@ -156,8 +169,8 @@ private extension MainViewModel {
 private extension MainViewModel {
     func updateVisibleRows(_ receivedModel: [StarWarsCharacter]) {
         visibleRows = receivedModel.map { character in
-            let isFavourite = character.name == favouriteCharacter
-            return VisibleCharacterModel(name: character.name,
+            let isFavourite = favouriteCharacter.contains(character.name)
+            return VisibleCharacterModel(id: character.id, name: character.name,
                                          height: character.height,
                                          favourite: isFavourite)
         }

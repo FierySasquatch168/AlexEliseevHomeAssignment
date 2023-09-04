@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37444E012AA597ED000800F2 /* GenericDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37444E002AA597ED000800F2 /* GenericDataStore.swift */; };
+		37444E032AA59819000800F2 /* DataStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37444E022AA59819000800F2 /* DataStoreManager.swift */; };
 		37F01D892AA4624A00A012B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F01D882AA4624A00A012B1 /* AppDelegate.swift */; };
 		37F01D8B2AA4624A00A012B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F01D8A2AA4624A00A012B1 /* SceneDelegate.swift */; };
 		37F01D8D2AA4624A00A012B1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F01D8C2AA4624A00A012B1 /* MainViewController.swift */; };
@@ -38,6 +40,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37444E002AA597ED000800F2 /* GenericDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericDataStore.swift; sourceTree = "<group>"; };
+		37444E022AA59819000800F2 /* DataStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreManager.swift; sourceTree = "<group>"; };
 		37F01D852AA4624A00A012B1 /* AlexEliseevHomeAssignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlexEliseevHomeAssignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37F01D882AA4624A00A012B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37F01D8A2AA4624A00A012B1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +85,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37444DFF2AA597DE000800F2 /* DataStore */ = {
+			isa = PBXGroup;
+			children = (
+				37444E022AA59819000800F2 /* DataStoreManager.swift */,
+				37444E002AA597ED000800F2 /* GenericDataStore.swift */,
+			);
+			path = DataStore;
+			sourceTree = "<group>";
+		};
 		37F01D7C2AA4624A00A012B1 = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +171,7 @@
 		37F01DAB2AA4634D00A012B1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				37444DFF2AA597DE000800F2 /* DataStore */,
 				37F01DCE2AA468C200A012B1 /* TableDataSource */,
 				37F01DAC2AA4636C00A012B1 /* Networking */,
 				37F01DA52AA4630500A012B1 /* CoordinatorFactory */,
@@ -371,6 +385,8 @@
 				37F01DC52AA4668900A012B1 /* ResponseModel.swift in Sources */,
 				37F01DAA2AA4634300A012B1 /* ScreenFactory.swift in Sources */,
 				37F01D8B2AA4624A00A012B1 /* SceneDelegate.swift in Sources */,
+				37444E012AA597ED000800F2 /* GenericDataStore.swift in Sources */,
+				37444E032AA59819000800F2 /* DataStoreManager.swift in Sources */,
 				37F01DC92AA4679500A012B1 /* MainViewModel.swift in Sources */,
 				37F01DDC2AA4842000A012B1 /* QueryItems.swift in Sources */,
 			);

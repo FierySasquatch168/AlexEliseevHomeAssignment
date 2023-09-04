@@ -16,11 +16,16 @@ final class CoordinatorFactory: CoordinatorFactoryProtocol {
     private let screenFactory: ScreenFactoryProtocol = ScreenFactory()
     private let networkService: NetworkService = BasicNetworkService()
     private let dataSourceManager: TableDataSourceProtocol = TableViewDataSource()
+    private let dataStore: DataStoreManagerProtocol = DataStoreManager(
+        starWarsCharactersStore: GenericStorage<StarWarsCharacter>(),
+        favouriteCharacterStore: GenericStorage<String>()
+    )
     
     func createFlowCoordinator(with router: Routable) -> CoordinatorProtocol {
         return FlowCoordinator(router: router,
                                screenFactory: screenFactory,
                                networkService: networkService,
-                               dataSource: dataSourceManager)
+                               dataSource: dataSourceManager,
+                               dataStore: dataStore)
     }
 }

@@ -17,15 +17,18 @@ final class FlowCoordinator: CoordinatorProtocol {
     private let screenFactory: ScreenFactoryProtocol
     private let networkService: NetworkService
     private let dataSource: TableDataSourceProtocol
+    private let dataStore: DataStoreManagerProtocol
     
     init(router: Routable,
          screenFactory: ScreenFactoryProtocol,
          networkService: NetworkService,
-         dataSource: TableDataSourceProtocol) {
+         dataSource: TableDataSourceProtocol,
+         dataStore: DataStoreManagerProtocol) {
         self.router = router
         self.screenFactory = screenFactory
         self.networkService = networkService
         self.dataSource = dataSource
+        self.dataStore = dataStore
     }
     
     func start() {
@@ -35,7 +38,9 @@ final class FlowCoordinator: CoordinatorProtocol {
 
 private extension FlowCoordinator {
     func showMainScreen() {
-        let screen = screenFactory.createMainScreen(networkService: networkService, dataSource: dataSource)
+        let screen = screenFactory.createMainScreen(networkService: networkService,
+                                                    dataSource: dataSource,
+                                                    dataStore: dataStore)
         
         router.setupRootViewController(viewController: screen)
     }

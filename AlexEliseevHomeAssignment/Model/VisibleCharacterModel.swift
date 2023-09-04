@@ -8,7 +8,7 @@
 import Foundation
 
 struct VisibleCharacterModel: Hashable {
-    let id = UUID().uuidString
+    let id: String
     let name: String
     let height: String
     var favourite: Bool

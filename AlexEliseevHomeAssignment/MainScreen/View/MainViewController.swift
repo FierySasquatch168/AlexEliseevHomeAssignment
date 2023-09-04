@@ -77,7 +77,7 @@ private extension MainViewController {
         viewModel.visibleObjectsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] characters in
-                self?.dataSource.updateTableView(with: characters, animatingDifference: false)
+                self?.dataSource.updateTableView(with: characters, animatingDifference: true)
                 self?.select()
             }
             .store(in: &cancellables)

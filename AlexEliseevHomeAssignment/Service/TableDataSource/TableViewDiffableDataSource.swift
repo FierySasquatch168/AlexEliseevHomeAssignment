@@ -46,7 +46,9 @@ private extension TableViewDataSource {
         else { return MainTableViewCell() }
         cell.viewModel = MainCellViewModel(character: item)
         cell.selectionStyle = .none
-        cell.isSelected = item.favourite        
+        cell.isSelected = item.favourite
+        
+        print("cellName: \(item.name) isFavourite: \(item.favourite) and isSelected: \(cell.isSelected)")
         return cell
     }
     
