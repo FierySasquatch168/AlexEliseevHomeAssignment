@@ -36,7 +36,7 @@ final class MainViewModel: ViewModelCombineProtocol {
     init(networkService: NetworkManagerProtocol, dataStore: DataStoreManagerProtocol) {
         self.networkService = networkService
         self.dataStore = dataStore
-        sendRequest(currentPage.toString(), isPageRequest: true)
+        sendRequest(currentPage.toString(), selectedQuery: .main)
         bindStore()
     }
     
@@ -71,7 +71,7 @@ extension MainViewModel: ScrollPaginationProtocol {
         guard let row else { return }
         if isCorrectRowForPagination(row) {
             currentPage += 1
-            sendRequest(currentPage.toString(), isPageRequest: true)
+            sendRequest(currentPage.toString(), selectedQuery: .main)
         }
     }
     
@@ -96,26 +96,32 @@ extension MainViewModel: FavouriteSelectable {
 // MARK: - Ext SearchableViewModelProtocol
 extension MainViewModel: SearchableViewModelProtocol {
     func searchFor(_ text: String) {
-        text.isEmpty ? updateVisibleRows(storedCharacters) : sendRequest(text, isPageRequest: false)
+        text.isEmpty ? updateVisibleRows(storedCharacters) : sendRequest(text, selectedQuery: .characterName)
     }
 }
 
 // MARK: - Ext Request
 private extension MainViewModel {
-    func sendRequest(_ name: String, isPageRequest: Bool) {
+    func sendRequest(_ name: String, selectedQuery: QueryItems) {
+        print("send request with name: \(name)")
         requestResultPublisher.send(.loading)
-        networkService.createGetRequestPublisher(name, query: .main, type: ResponseModel.self)
+        networkService.createGetRequestPublisher(name, query: selectedQuery, type: ResponseModel.self)
             .sink { [weak self] completion in
                 self?.processCompletion(completion)
                 self?.updateRequestResult(result: nil)
             } receiveValue: { [weak self] model in
-                self?.processModel(model, isPageRequest: isPageRequest)
+                self?.processModel(model, query: selectedQuery)
             }.store(in: &cancellables)
 
     }
     
-    func processModel(_ model: ResponseModel, isPageRequest: Bool) {
-        isPageRequest ? updateDataBase(model) : updateVisibleRows(model.results)
+    func processModel(_ model: ResponseModel, query: QueryItems) {
+        switch query {
+        case .main:
+            updateDataBase(model)
+        case .characterName:
+            updateVisibleRows(model.results)
+        }
     }
     
     func updateDataBase(_ model: ResponseModel) {

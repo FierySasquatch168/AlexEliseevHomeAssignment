@@ -62,11 +62,14 @@ private extension BasicNetworkService {
     func parseResponse(_ data: Data, _ response: URLResponse?) throws -> Data {
         // Check if the response is an HTTPURLResponse and has a status code
         guard let httpResponse = response as? HTTPURLResponse else {
+            print("invalid response")
             throw NetworkError.invalidResponse
         }
         
         // Check if the response status code is within the expected range (e.g., 200-299)
         guard (200..<300).contains(httpResponse.statusCode) else {
+            print(httpResponse.statusCode)
+            print("bad response")
             throw NetworkError.badResponse(httpResponse.statusCode)
         }
         
