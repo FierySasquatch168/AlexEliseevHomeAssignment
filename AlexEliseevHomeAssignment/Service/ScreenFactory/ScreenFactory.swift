@@ -8,13 +8,13 @@
 import Foundation
 
 protocol ScreenFactoryProtocol {
-    func createMainScreen(networkService: NetworkService,
+    func createMainScreen(networkService: NetworkManagerProtocol,
                           dataSource: TableDataSourceProtocol,
                           dataStore: DataStoreManagerProtocol) -> Presentable
 }
 
 struct ScreenFactory: ScreenFactoryProtocol {
-    func createMainScreen(networkService: NetworkService,
+    func createMainScreen(networkService: NetworkManagerProtocol,
                           dataSource: TableDataSourceProtocol,
                           dataStore: DataStoreManagerProtocol) -> Presentable {
         let viewModel = MainViewModel(networkService: networkService, dataStore: dataStore)

@@ -8,44 +8,22 @@
 import UIKit
 import Combine
 
-final class MainViewController: UIViewController {    
-    private let viewModel: MainViewModelProtocol
+final class MainViewController: UIViewController, LoadingViewControllerProtocol {
+    private let viewModel: ViewModelCombineProtocol
     private let dataSource: TableDataSourceProtocol
     
     private var cancellables = Set<AnyCancellable>()
     
-    private lazy var searchTextField: UISearchTextField = {
-        let textField = UISearchTextField()
-        textField.placeholder = K.Placeholders.searchPlaceholder
-        textField.delegate = self
-        return textField
-    }()
+    private lazy var searchTextField = CustomSearchTextField(delegate: self)
+    private lazy var tableView = CustomTableView(delegate: self)
+    private lazy var mainStackView = CustomStackView(axis: .vertical,
+                                                     spacing: 20,
+                                                     arrangedSubviews: [searchTextField, tableView])
     
-    private lazy var tableView: UITableView = {
-        let table = UITableView()
-        table.delegate = self
-        table.allowsMultipleSelection = false
-        table.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.reuseIdentifier)
-        return table
-    }()
-    
-    private lazy var mainStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 20
-        
-        stackView.addArrangedSubview(searchTextField)
-        stackView.addArrangedSubview(tableView)
-        return stackView
-    }()
-    
-    private lazy var loadingView: CustomAnimatedView = {
-        let view = CustomAnimatedView(frame: .zero)
-        return view
-    }()
+    lazy var loadingView = CustomAnimatedView(frame: .zero)
     
     // MARK: - Init
-    init(viewModel: MainViewModelProtocol,
+    init(viewModel: ViewModelCombineProtocol,
          dataSource: TableDataSourceProtocol) {
         self.viewModel = viewModel
         self.dataSource = dataSource
@@ -78,30 +56,14 @@ private extension MainViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] characters in
                 self?.dataSource.updateTableView(with: characters, animatingDifference: true)
-                self?.select()
             }
             .store(in: &cancellables)
         
         viewModel.requestResultPublisher
             .receive(on: DispatchQueue.main)
-            .sink { completion in
-                if case .failure(let error) = completion {
-                    print(error)
-                }
-            } receiveValue: { [weak self] requestResult in
-                self?.updateLoadingAnimation(requestResult)
-            }
-            .store(in: &cancellables)
-    }
-    
-    func updateLoadingAnimation(_ result: RequestResult?) {
-        showOrHideAnimation(loadingView, for: result)
-    }
-    
-    func select() {
-        tableView.selectRow(at: viewModel.favouriteItemPublisher.value,
-                            animated: false,
-                            scrollPosition: .none)
+            .sink { [weak self] requestResult in
+                self?.loadingView.toggleAnimationVisibility(for: requestResult)
+            }.store(in: &cancellables)
     }
 }
 
@@ -109,25 +71,24 @@ private extension MainViewController {
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let stringHeight = viewModel.visibleObjectsPublisher.value[indexPath.row].height
-        return stringHeight.toCGFloat() ?? 50
+        return stringHeight.toCGFloat()
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         guard let tableView = scrollView as? UITableView else { return }
-
         let lastVisibleRow = tableView.indexPathsForVisibleRows?.last?.row
-        viewModel.lastRowPublisher.send(lastVisibleRow)
+        viewModel.didScrollForNextPage(row: lastVisibleRow)
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? MainTableViewCell else { return }
         cell.isSelected = true
-        viewModel.favouriteItemPublisher.send(indexPath)
+        viewModel.selectFavourite(at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        guard let selectedIndexPath = viewModel.favouriteItemPublisher.value,
+        guard let selectedIndexPath = viewModel.currentFavourite(),
               let cell = tableView.cellForRow(at: selectedIndexPath) as? MainTableViewCell
         else { return }
         cell.isSelected = false
@@ -137,17 +98,13 @@ extension MainViewController: UITableViewDelegate {
 // MARK: - Ext TextFieldDelegate
 extension MainViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let text = textField.text {
-            viewModel.nameSearchPublisher.send(text)
-        }
-        
+        if let text = textField.text { viewModel.searchFor(text) }
         textField.resignFirstResponder()
-        
         return true
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        viewModel.clearTextFieldPublisher.send(true)
+        viewModel.searchFor("")
         return true
     }
 }
@@ -168,18 +125,6 @@ private extension MainViewController {
             mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             mainStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        ])
-    }
-    
-    func setupLoadingView() {
-        view.addSubview(loadingView)
-        loadingView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            loadingView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loadingView.heightAnchor.constraint(equalToConstant: 50),
-            loadingView.widthAnchor.constraint(equalToConstant: 50)
         ])
     }
 }

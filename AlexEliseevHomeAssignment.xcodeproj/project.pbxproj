@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		37444E012AA597ED000800F2 /* GenericDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37444E002AA597ED000800F2 /* GenericDataStore.swift */; };
 		37444E032AA59819000800F2 /* DataStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37444E022AA59819000800F2 /* DataStoreManager.swift */; };
+		377AC66E2B1097A400205A61 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AC66D2B1097A400205A61 /* NetworkManager.swift */; };
+		377AC6702B109DAA00205A61 /* ErrorProcessProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AC66F2B109DAA00205A61 /* ErrorProcessProtocol.swift */; };
+		377AC6722B10A2E700205A61 /* LoadingViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AC6712B10A2E700205A61 /* LoadingViewControllerProtocol.swift */; };
+		377AC6742B10A92600205A61 /* ViewModelCombineProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AC6732B10A92600205A61 /* ViewModelCombineProtocol.swift */; };
+		377AC6772B10A9E600205A61 /* CustomSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AC6762B10A9E600205A61 /* CustomSearchTextField.swift */; };
+		377AC6792B10AA6E00205A61 /* CustomTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AC6782B10AA6E00205A61 /* CustomTableView.swift */; };
+		377AC67B2B10AAFF00205A61 /* CustomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AC67A2B10AAFF00205A61 /* CustomStackView.swift */; };
 		37F01D892AA4624A00A012B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F01D882AA4624A00A012B1 /* AppDelegate.swift */; };
 		37F01D8B2AA4624A00A012B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F01D8A2AA4624A00A012B1 /* SceneDelegate.swift */; };
 		37F01D8D2AA4624A00A012B1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F01D8C2AA4624A00A012B1 /* MainViewController.swift */; };
@@ -33,7 +40,6 @@
 		37F01DD02AA468D600A012B1 /* TableViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F01DCF2AA468D600A012B1 /* TableViewDiffableDataSource.swift */; };
 		37F01DD42AA4701900A012B1 /* CustomAnimatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F01DD32AA4701900A012B1 /* CustomAnimatedView.swift */; };
 		37F01DD62AA4704100A012B1 /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F01DD52AA4704100A012B1 /* RequestResult.swift */; };
-		37F01DD82AA475B300A012B1 /* Ext LoadingAnimationUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F01DD72AA475B300A012B1 /* Ext LoadingAnimationUpdate.swift */; };
 		37F01DDA2AA47D8100A012B1 /* Ext StringToCgfloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F01DD92AA47D8100A012B1 /* Ext StringToCgfloat.swift */; };
 		37F01DDC2AA4842000A012B1 /* QueryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F01DDB2AA4842000A012B1 /* QueryItems.swift */; };
 		37F01DDE2AA4A43700A012B1 /* VisibleCharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F01DDD2AA4A43700A012B1 /* VisibleCharacterModel.swift */; };
@@ -43,6 +49,13 @@
 /* Begin PBXFileReference section */
 		37444E002AA597ED000800F2 /* GenericDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericDataStore.swift; sourceTree = "<group>"; };
 		37444E022AA59819000800F2 /* DataStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreManager.swift; sourceTree = "<group>"; };
+		377AC66D2B1097A400205A61 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		377AC66F2B109DAA00205A61 /* ErrorProcessProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorProcessProtocol.swift; sourceTree = "<group>"; };
+		377AC6712B10A2E700205A61 /* LoadingViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewControllerProtocol.swift; sourceTree = "<group>"; };
+		377AC6732B10A92600205A61 /* ViewModelCombineProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelCombineProtocol.swift; sourceTree = "<group>"; };
+		377AC6762B10A9E600205A61 /* CustomSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchTextField.swift; sourceTree = "<group>"; };
+		377AC6782B10AA6E00205A61 /* CustomTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableView.swift; sourceTree = "<group>"; };
+		377AC67A2B10AAFF00205A61 /* CustomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStackView.swift; sourceTree = "<group>"; };
 		37F01D852AA4624A00A012B1 /* AlexEliseevHomeAssignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlexEliseevHomeAssignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37F01D882AA4624A00A012B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37F01D8A2AA4624A00A012B1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,7 +82,6 @@
 		37F01DCF2AA468D600A012B1 /* TableViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDiffableDataSource.swift; sourceTree = "<group>"; };
 		37F01DD32AA4701900A012B1 /* CustomAnimatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimatedView.swift; sourceTree = "<group>"; };
 		37F01DD52AA4704100A012B1 /* RequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResult.swift; sourceTree = "<group>"; };
-		37F01DD72AA475B300A012B1 /* Ext LoadingAnimationUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext LoadingAnimationUpdate.swift"; sourceTree = "<group>"; };
 		37F01DD92AA47D8100A012B1 /* Ext StringToCgfloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext StringToCgfloat.swift"; sourceTree = "<group>"; };
 		37F01DDB2AA4842000A012B1 /* QueryItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryItems.swift; sourceTree = "<group>"; };
 		37F01DDD2AA4A43700A012B1 /* VisibleCharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibleCharacterModel.swift; sourceTree = "<group>"; };
@@ -94,6 +106,14 @@
 				37444E002AA597ED000800F2 /* GenericDataStore.swift */,
 			);
 			path = DataStore;
+			sourceTree = "<group>";
+		};
+		377AC6752B10A92B00205A61 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				377AC6732B10A92600205A61 /* ViewModelCombineProtocol.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		37F01D7C2AA4624A00A012B1 = {
@@ -185,6 +205,7 @@
 		37F01DAC2AA4636C00A012B1 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				377AC66D2B1097A400205A61 /* NetworkManager.swift */,
 				37F01DAD2AA4637900A012B1 /* NetworkService.swift */,
 				37F01DB82AA463D200A012B1 /* Request */,
 				37F01DB72AA463CC00A012B1 /* Error */,
@@ -241,11 +262,12 @@
 		37F01DBE2AA4648300A012B1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				377AC66F2B109DAA00205A61 /* ErrorProcessProtocol.swift */,
 				37F01DBF2AA4649100A012B1 /* Ext Presentable.swift */,
 				37F01DC12AA464AF00A012B1 /* Ext ReuseIdentifiable.swift */,
-				37F01DD72AA475B300A012B1 /* Ext LoadingAnimationUpdate.swift */,
 				37F01DD92AA47D8100A012B1 /* Ext StringToCgfloat.swift */,
 				37F59F4B2AA5D5B800F0B435 /* Ext ToString.swift */,
+				377AC6712B10A2E700205A61 /* LoadingViewControllerProtocol.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -272,6 +294,7 @@
 		37F01DC72AA4678700A012B1 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				377AC6752B10A92B00205A61 /* Protocol */,
 				37F01DC82AA4679500A012B1 /* MainViewModel.swift */,
 				37F01DCC2AA467CA00A012B1 /* MainCellViewModel.swift */,
 			);
@@ -290,6 +313,9 @@
 			isa = PBXGroup;
 			children = (
 				37F01DD32AA4701900A012B1 /* CustomAnimatedView.swift */,
+				377AC6762B10A9E600205A61 /* CustomSearchTextField.swift */,
+				377AC6782B10AA6E00205A61 /* CustomTableView.swift */,
+				377AC67A2B10AAFF00205A61 /* CustomStackView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -379,17 +405,23 @@
 				37F01D892AA4624A00A012B1 /* AppDelegate.swift in Sources */,
 				37F59F4C2AA5D5B800F0B435 /* Ext ToString.swift in Sources */,
 				37F01DDE2AA4A43700A012B1 /* VisibleCharacterModel.swift in Sources */,
+				377AC6702B109DAA00205A61 /* ErrorProcessProtocol.swift in Sources */,
 				37F01DCD2AA467CA00A012B1 /* MainCellViewModel.swift in Sources */,
 				37F01DC02AA4649100A012B1 /* Ext Presentable.swift in Sources */,
+				377AC66E2B1097A400205A61 /* NetworkManager.swift in Sources */,
 				37F01DC22AA464AF00A012B1 /* Ext ReuseIdentifiable.swift in Sources */,
+				377AC6722B10A2E700205A61 /* LoadingViewControllerProtocol.swift in Sources */,
+				377AC6772B10A9E600205A61 /* CustomSearchTextField.swift in Sources */,
 				37F01DDA2AA47D8100A012B1 /* Ext StringToCgfloat.swift in Sources */,
+				377AC67B2B10AAFF00205A61 /* CustomStackView.swift in Sources */,
 				37F01DB42AA463B100A012B1 /* NetworkError.swift in Sources */,
-				37F01DD82AA475B300A012B1 /* Ext LoadingAnimationUpdate.swift in Sources */,
+				377AC6792B10AA6E00205A61 /* CustomTableView.swift in Sources */,
 				37F01DBB2AA4642A00A012B1 /* K.swift in Sources */,
 				37F01DC52AA4668900A012B1 /* ResponseModel.swift in Sources */,
 				37F01DAA2AA4634300A012B1 /* ScreenFactory.swift in Sources */,
 				37F01D8B2AA4624A00A012B1 /* SceneDelegate.swift in Sources */,
 				37444E012AA597ED000800F2 /* GenericDataStore.swift in Sources */,
+				377AC6742B10A92600205A61 /* ViewModelCombineProtocol.swift in Sources */,
 				37444E032AA59819000800F2 /* DataStoreManager.swift in Sources */,
 				37F01DC92AA4679500A012B1 /* MainViewModel.swift in Sources */,
 				37F01DDC2AA4842000A012B1 /* QueryItems.swift in Sources */,

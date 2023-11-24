@@ -13,10 +13,11 @@ protocol CoordinatorFactoryProtocol {
 
 final class CoordinatorFactory: CoordinatorFactoryProtocol {
     
-    private let screenFactory: ScreenFactoryProtocol = ScreenFactory()
-    private let networkService: NetworkService = BasicNetworkService()
-    private let dataSourceManager: TableDataSourceProtocol = TableViewDataSource()
-    private let dataStore: DataStoreManagerProtocol = DataStoreManager(
+    private lazy var screenFactory: ScreenFactoryProtocol = ScreenFactory()
+    private lazy var networkService: NetworkService = BasicNetworkService()
+    private lazy var networkMaanger: NetworkManagerProtocol = NetworkManager(networkService: networkService)
+    private lazy var dataSourceManager: TableDataSourceProtocol = TableViewDataSource()
+    private lazy var dataStore: DataStoreManagerProtocol = DataStoreManager(
         starWarsCharactersStore: GenericStorage<StarWarsCharacter>(),
         favouriteCharacterStore: GenericStorage<String>()
     )
@@ -24,7 +25,7 @@ final class CoordinatorFactory: CoordinatorFactoryProtocol {
     func createFlowCoordinator(with router: Routable) -> CoordinatorProtocol {
         return FlowCoordinator(router: router,
                                screenFactory: screenFactory,
-                               networkService: networkService,
+                               networkManager: networkMaanger,
                                dataSource: dataSourceManager,
                                dataStore: dataStore)
     }

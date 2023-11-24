@@ -8,8 +8,8 @@
 import Foundation
 
 extension String {
-    func toCGFloat() -> CGFloat? {
-        guard let floatValue = Float(self) else { return nil }
+    func toCGFloat() -> CGFloat {
+        guard let floatValue = Float(self) else { return 50 }
         return CGFloat(floatValue)
     }
 }

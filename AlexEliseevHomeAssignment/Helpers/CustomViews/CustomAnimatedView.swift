@@ -11,9 +11,19 @@ final class CustomAnimatedView: UIView {
     
     private var shapeLayer: CAShapeLayer?
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.isHidden = true
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     var result: RequestResult? {
         didSet {
-            if result != nil { createLayer() }
+            guard let result else { return }
+            createLayer(for: result)
         }
     }
     
@@ -26,12 +36,25 @@ final class CustomAnimatedView: UIView {
     func stopAnimation() {
         removeTheLayer()
     }
+    
+    func toggleAnimationVisibility(for requestResult: RequestResult?) {
+        guard let requestResult
+        else {
+            self.stopAnimation()
+            self.isHidden = true
+            return
+        }
+        self.stopAnimation()
+        self.isHidden = false
+        self.result = requestResult
+        self.startAnimation()
+    }
 }
 
 // MARK: - Ext UIView creation
 private extension CustomAnimatedView {
-    func createLayer() {
-        shapeLayer = createShapeLayer()
+    func createLayer(for result: RequestResult) {
+        shapeLayer = createShapeLayer(from: result)
     }
     
     func removeTheLayer() {
@@ -39,19 +62,18 @@ private extension CustomAnimatedView {
         shapeLayer = nil
     }
     
-    func createShapeLayer() -> CAShapeLayer {
+    func createShapeLayer(from result: RequestResult) -> CAShapeLayer {
         let layer = CAShapeLayer()
-        layer.path = createCGPath()
-        layer.strokeColor = UIColor.systemTeal.cgColor
+        layer.path = createCGPath(for: result)
+        layer.strokeColor = UIColor.green.cgColor
         layer.lineWidth = 5.0
         layer.fillColor = UIColor.clear.cgColor
-        
-        if result == .loading { layer.strokeEnd = 0.0  }
-        
+        layer.strokeEnd = 0.0 // Initially hide the circle
+       
         return layer
     }
     
-    func createCGPath() -> CGPath {
+    func createCGPath(for result: RequestResult) -> CGPath {
         let size = createSize()
         return createCirclePath(with: size)
     }
@@ -64,9 +86,7 @@ private extension CustomAnimatedView {
         animation.fromValue = 0.0
         animation.toValue = 1.0
         animation.duration = 0.9
-        
-        if result == .loading { animation.repeatCount = .infinity }
-        
+        animation.repeatCount = .infinity
         layer.add(animation, forKey: "strokeAnimation")
         
     }
