@@ -103,7 +103,6 @@ extension MainViewModel: SearchableViewModelProtocol {
 // MARK: - Ext Request
 private extension MainViewModel {
     func sendRequest(_ name: String, selectedQuery: QueryItems) {
-        print("send request with name: \(name)")
         requestResultPublisher.send(.loading)
         networkService.createGetRequestPublisher(name, query: selectedQuery, type: ResponseModel.self)
             .sink { [weak self] completion in
